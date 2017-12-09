@@ -1,0 +1,26 @@
+<!--"""Autor: Luis Gerardo Aguayo Lopez y Carla del Carmen Barcenas Castillo"""
+"""GITI9072"""
+"""Red social se basa en un reto llevar acabo una red social la cual vamos a poder registrar, iniciar sesion,
+publicar y ver publicaciones de otros usuarios ."""  -->
+{% macro render_field(field) %}
+
+	<div class="field">
+		{%if field.errors%}
+			{%for error in field.errors%}
+				<div class="notification error">{{error}}</div>
+			{%endfor%}
+		{%endif%}
+		{{field(placeholder = field.label.text)}}
+	</div>
+
+{%endmacro%}
+
+
+{% macro hide_email(User) %}
+  {# split name on @ into username and domain #}
+  {% with name, domain = User.email.split('@') %}
+    {# concatenate first name char, loop over remaining name chars replacing #}
+    {# with '*', the @-sign, and the domain #}
+    {{ name[0] }}{% for letter in name[1:] %}*{% endfor %}@{{ domain }}
+  {% endwith %}
+{% endmacro %}
